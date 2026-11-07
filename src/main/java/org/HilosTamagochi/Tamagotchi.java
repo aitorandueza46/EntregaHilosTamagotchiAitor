@@ -16,6 +16,12 @@ public class Tamagotchi {
     volatile int suciedad = 0;
     long tiempoenelqueinicialimpio;
 
+    volatile boolean esperandoRespuesta = false;
+    volatile int sumaA = 0;
+    volatile int sumaB = 0;
+    volatile int respuestaCuidador = 0;
+    volatile boolean respuestaDisponible = false;
+
 
 
     
