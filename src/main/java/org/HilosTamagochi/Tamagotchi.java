@@ -7,10 +7,12 @@ public class Tamagotchi {
     private static final int TIEMPO_DESCENDENTE_QUE_AGUANTA_SUCIO = 20 * 1000;   
 
     final String nombre;
+    final int velocidadComida;
     final long timestampInicio;
 
     volatile boolean vivo = true;
     volatile String estado = "ocioso";
+    volatile String accion = "";
     volatile int suciedad = 0;
     long tiempoenelqueinicialimpio;
 
@@ -27,6 +29,7 @@ public class Tamagotchi {
         this.nombre = nombre;
         this.timestampInicio = System.currentTimeMillis();
         this.tiempoenelqueinicialimpio = this.timestampInicio;
+        this.velocidadComida = 2000 + (int) (Math.random() * 4001);
     }
 
     
@@ -59,6 +62,21 @@ public class Tamagotchi {
                 return;
             }
         }
+    }
+
+    //Pedir accion sirve para cambiar el estado por la accion enviada, si no puede no lo hace, sirve para que el hilo detecte el cambio
+    public String pedirAccion(String accion) {
+        if (!vivo) {
+            return nombre + " esta muerto.";
+        }
+        //el estado actual no impedire que el estado cambie a menos que este ocioso
+        if (!estado.equals("ocioso")) {
+            return nombre + " esta ocupado (" + estado + ").";
+        }
+
+        estado = accion;
+        this.accion = accion;
+        return nombre + " hara " + accion + ".";
     }
 
     // Cosa pequeña: el cuidador lo mata; solo se atiende si esta ocioso

@@ -57,7 +57,7 @@ public class App {
 
 
             System.out.println("");
-            System.out.println("1 matar  0 salir");
+            System.out.println("1 comer  2 matar  0 salir");
             System.out.println("Opcion:");
 
             int opcion;
@@ -72,7 +72,7 @@ public class App {
             	//Unica forma de salir del bucle infinito
                 break;
             }
-            if (opcion != 1) {
+            if (opcion < 1 || opcion > 2) {
                 System.out.println("Opcion no valida.");
                 continue;
             }
@@ -103,6 +103,8 @@ public class App {
             
             //Aqui el usuario intenta mandar una accion al tamagotchi, si la accion cambia el bucle de vida del hilo lo detecta y hace la accion
             if (opcion == 1) {
+                System.out.println(tamagotchis[indice].pedirAccion("comer"));
+            } else if (opcion == 2) {
                 System.out.println(tamagotchis[indice].matar());
             }
         }
